@@ -1,0 +1,57 @@
+:local(.Panel) {
+    $color: dodgerblue;
+    $border: 1px solid $color;
+    $radius: 10px;
+    min-width: 32px;
+    min-height: 32px;
+    font-family: 'Roboto', sans-serif;
+    display: inline-flex;
+    flex-direction: column;
+    $contentSelector: '';
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        margin: 5px 0;
+    }
+    @mixin headerBorders {
+        border-top: $border;
+        border-top-left-radius: $radius;
+        border-top-right-radius: $radius;
+    }
+    @mixin contentBorders {
+        border-bottom: $border;
+        border-bottom-left-radius: $radius;
+        border-bottom-right-radius: $radius;
+    }
+    > *:nth-child(0n+2),
+    header {
+        padding: 10px;
+    }
+    header {
+        background: $color;
+        color: white;
+        user-select: none;
+        cursor: default;
+        @include headerBorders;
+    }
+    > *:nth-child(0n+2) {
+        flex: 1;
+        border-left: $border;
+        border-right: $border;
+        @include contentBorders;
+    }
+    &.no-header > *:nth-child(0n+2) {
+        @include headerBorders;
+    }
+    &.no-content header {
+        @include contentBorders;
+    }
+    &.no-header.no-content {
+        border: $border;
+        @include headerBorders;
+        @include contentBorders;
+    }
+}
